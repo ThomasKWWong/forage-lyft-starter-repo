@@ -8,6 +8,8 @@ from engine.willoughby_engine import WilloughbyEngine
 from battery.nubbin_battery import NubbinBattery
 from battery.spindler_battery import SpindlerBattery
 
+from tire.carrigan_tire import CarriganTire
+from tire.octoprime_tire import OctoprimeTire
 
 #Engine tests
 class TestCapulet(unittest.TestCase):
@@ -72,20 +74,51 @@ class TestNubbin(unittest.TestCase):
         battery = NubbinBattery(last_service_date, today)
         self.assertFalse(battery.needs_service())
 
-class testSpindler(unittest.TestCase):
+
+class testSpindler(unittest.TestCase): #updated for 3 years
     def test_battery_should_be_serviced(self):
         today = datetime.today().date()
-        last_service_date = today.replace(year=today.year - 3)
+        last_service_date = today.replace(year=today.year - 4)
 
         battery = SpindlerBattery(last_service_date, today)
         self.assertTrue(battery.needs_service())
 
     def test_battery_should_not_be_serviced(self):
         today = datetime.today().date()
-        last_service_date = today.replace(year=today.year - 1)
+        last_service_date = today.replace(year=today.year - 2)
 
         battery = SpindlerBattery(last_service_date, today)
         self.assertFalse(battery.needs_service())
+
+
+#Tire tests
+class TestCarrigan(unittest.TestCase):
+    def test_tire_should_be_serviced(self):
+        array_of_tire_worness = [0.9, 0, 0, 0]
+
+        tire = CarriganTire(array_of_tire_worness)
+        self.assertTrue(tire.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        array_of_tire_worness = [1, 1, 1, 0]
+
+        tire = OctoprimeTire(array_of_tire_worness)
+        self.assertTrue(tire.needs_service())
+
+
+class TestOctoprime(unittest.TestCase):
+    def test_tire_should_be_serviced(self):
+        array_of_tire_worness = [1, 1, 1, 0]
+
+        tire = OctoprimeTire(array_of_tire_worness)
+        self.assertTrue(tire.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        array_of_tire_worness = [1, 1, 0.5, 0.4]
+
+        tire = OctoprimeTire(array_of_tire_worness)
+        self.assertFalse(tire.needs_service())
+
 
 if __name__ == '__main__':
     unittest.main()
