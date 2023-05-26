@@ -1,12 +1,12 @@
 #Import all engines and batteries
 from car import Car
 
-from Engines.capulet_engine import Capulet
-from Engines.sternman_engine import Sternman
-from Engines.willoughby_engine import Willoughby
+from engine.capulet_engine import Capulet
+from engine.sternman_engine import Sternman
+from engine.willoughby_engine import Willoughby
 
-from Batteries.nubbin_battery import Nubbin
-from Batteries.spindler_battery import Spindler
+from battery.nubbin_battery import Nubbin
+from battery.spindler_battery import Spindler
 #--------------------------------
 
 
